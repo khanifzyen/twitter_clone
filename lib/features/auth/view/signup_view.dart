@@ -1,6 +1,7 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:twitter_clone/features/auth/controller/auth_controller.dart';
 
 import '../../../common/common.dart';
 import '../../../constants/constants.dart';
@@ -30,6 +31,14 @@ class _SignUpViewState extends ConsumerState<SignUpView> {
     passwordController.dispose();
   }
 
+  void onSignUp() {
+    ref.read(authControllerProvider.notifier).signUp(
+          email: emailController.text,
+          password: passwordController.text,
+          context: context,
+        );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -47,7 +56,7 @@ class _SignUpViewState extends ConsumerState<SignUpView> {
                 Align(
                   alignment: Alignment.centerRight,
                   child: RoundedSmallButton(
-                    onTap: () {},
+                    onTap: onSignUp,
                     label: 'Done',
                   ),
                 ),
